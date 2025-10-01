@@ -11,7 +11,7 @@
 - [Pré-processamento](#pré-processamento)  
 - [Modelo (visão geral)](#modelo-visão-geral)  
 - [Componentes do modelo](#componentes-do-modelo)  
-  - [1) Baseline por ranking: \(p_{\text{gap}}\)](#1-baseline-por-ranking-p_textgap)  
+  - [1) Baseline por ranking: ($p_{\text{gap}$})(#1-baseline-por-ranking-p_textgap)  
   - [2) Forma recente (Beta–Binomial)](#2-forma-recente-beta–binomial)  
   - [3) Head-to-Head (H2H) com decaimento por recência](#3-head-to-head-h2h-com-decaimento-por-recência)  
   - [4) Combinação final](#4-combinação-final)  
@@ -71,8 +71,8 @@ A probabilidade de A vencer é modelada via um logit que agrega três termos:
 
 
 $$
-\underbrace{\text{logit}\P(A \text{ vence})}_{\text{logit}(p_A)}
-\;=\;
+\underbrace{\text{logit}P(A \text{ vence})}_{\text{logit}(p_A)}
+=
 \underbrace{s\cdot \text{logit}(p_{\text{gap}})}_{\text{baseline por ranking}}
 \;+\;
 \underbrace{\big[\Delta_A - \Delta_B\big]}_{\text{forma recente}}
