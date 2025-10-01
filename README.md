@@ -158,7 +158,7 @@ e combinamos:
 
 $$
 \text{logit}(p_A)
-=cs\cdot \text{logit}(p_{\text{gap}}) + \big[\Delta_A - \Delta_B\big] + \lambda\cdot \text{logit}(p_{\text{H2H}}),
+=s\cdot \text{logit}(p_{\text{gap}}) + \big[\Delta_A - \Delta_B\big] + \lambda\cdot \text{logit}(p_{\text{H2H}}),
 $$
 
 com $\lambda\ge 0$ ajustável pelo usuário (ex.: 0 = ignora H2H; 1 = influência padrão).  
