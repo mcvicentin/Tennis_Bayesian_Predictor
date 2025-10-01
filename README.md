@@ -78,30 +78,30 @@ $$
 $$
 
 - s=+1 se **A** é melhor ranqueado (menor número), s=-1 se **B** é melhor ranqueado.
-- $(\Delta_X = \text{logit}(p_{\text{form},X}))$ é a força recente do jogador \(X\) (vide abaixo).
-- \(\lambda\) é o **peso** do fator H2H, ajustável pelo usuário.
-- A saída final é \(p_A = \sigma\big(\text{logit}(p_A)\big)\), onde \(\sigma\) é a sigmoid.
+- $\Delta_X = \text{logit}(p_{\text{form},X})$ é a força recente do jogador $X$ (vide abaixo).
+- $\lambda$ é o **peso** do fator H2H, ajustável pelo usuário.
+- A saída final é $p_A = \sigma\big(\text{logit}(p_A)\big), onde $\sigma$ é a sigmoid.
 
 ---
 
 ## Componentes do modelo
 
-### 1) Baseline por ranking: \(p_{\text{gap}}\)
+### 1) Baseline por ranking: $p_{\text{gap}}$
 
 Construímos uma **tabela empírica** a partir do Jeff:
 
 - *Bins* de **gap** de ranking (diferença absoluta):  
-  \([0,5], (5,10], (10,20], (20,50], (50,100], (100,200], (200,500], (500, \infty)\).
+  $[0,5], (5,10], (10,20], (20,50], (50,100], (100,200], (200,500], (500, \infty)$.
 - *Bins* do **melhor ranking** em quadra:  
-  \([1,10], [11,20], [21,50], [51,100], [101,200], [201,500], [501,1000], (1000,\infty)\).
+  $[1,10], [11,20], [21,50], [51,100], [101,200], [201,500], [501,1000], (1000,\infty)$.
 
 Para cada célula (best\_bin, gap\_bin) calculamos a fração de vezes que o **melhor ranqueado venceu**, com **suavização de Laplace** (equivalente a prior Beta(2,2)):
 
-\[
-\hat{p}_{\text{gap}} \;=\; \frac{\text{wins} + 2}{\text{jogos} + 4}.
-\]
+$$
+\hat{p}_{\text{gap}} = \frac{\text{wins} + 2}{\text{jogos} + 4}.
+$$
 
-Guardamos também \(\text{logit}(p_{\text{gap}})=\ln\frac{p_{\text{gap}}}{1-p_{\text{gap}}}\).
+Guardamos também $\text{logit}(p_{\text{gap}})=\ln\frac{p_{\text{gap}}}{1-p_{\text{gap}}}$.
 
 ---
 
