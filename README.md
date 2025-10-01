@@ -36,7 +36,7 @@
 ## Fontes de dados
 
 - **Jeff Sackmann** (`tennis_atp`, `tennis_wta`): histórico amplo (anos anteriores), consistente, com `winner_id/loser_id`, datas, rankings dos jogadores no dia do jogo.  
-  - Usado para: **calibrar o baseline** \(p_{\text{gap}}\) e compor histórico para **forma** e **H2H**.
+  - Usado para: **calibrar o baseline** $(p_{\text{gap}})$ e compor histórico para **forma** e **H2H**.
 - **Tennis-data.co.uk (2025)**: partidas correntes (ATP/WTA) de 2025.  
   - Usado para: **atualizar** o histórico recente (forma/H2H) e **pegar o ranking do último jogo**.
 
@@ -69,7 +69,7 @@
 
 A probabilidade de A vencer é modelada via um logit que agrega três termos:
 
-\[
+$
 \underbrace{\text{logit}\,P(A \text{ vence})}_{\text{logit}(p_A)}
 \;=\;
 \underbrace{s\cdot \text{logit}(p_{\text{gap}})}_{\text{baseline por ranking}}
@@ -77,7 +77,7 @@ A probabilidade de A vencer é modelada via um logit que agrega três termos:
 \underbrace{\big[\Delta_A - \Delta_B\big]}_{\text{forma recente}}
 \;+\;
 \underbrace{\lambda\cdot \text{logit}(p_{\text{H2H}})}_{\text{head-to-head (se n}\ge 4)}
-\]
+$
 
 - \(s=+1\) se **A** é melhor ranqueado (menor número), \(s=-1\) se **B** é melhor ranqueado.
 - \(\Delta_X = \text{logit}(p_{\text{form},X})\) é a força recente do jogador \(X\) (vide abaixo).
