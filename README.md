@@ -116,7 +116,7 @@ Para cada jogador $X$, percorremos seu histórico **ordenado por data** e calcul
   \frac{\alpha + w}{\alpha + \beta + n}.$$
   
 - Para predição **futura**, usamos **o último ponto disponível** $p_{\text{form},X}^{\text{(últ)}}$ e definimos:
-  $$ \Delta_X = \text{logit}\Big(\text{clip}\big(p_{\text{form},X}^{\text{(últ)}} 10^{-4} 1-10^{-4}\big)\Big).$$
+  $$\Delta_X = \text{logit}\Big(\text{clip}\big(p_{\text{form},X}^{\text{(últ)}} 10^{-4} 1-10^{-4}\big)\Big).$$
 
 ---
 
