@@ -269,11 +269,13 @@ def predict_future_match(df_matches, p_gap_table, playerA_name, playerB_name,
     if rankA < rankB:
         logit_p = logit_gap + (deltaA - deltaB) + lambda_h2h * logit_h2h
         pA = sigmoid(logit_p); pB = 1 - pA
-        favorite = playerA_name
+        if pA >= pB: favorite = playerA_name
+        else: favorite = playerB_name 
     else:
         logit_p = logit_gap + (deltaB - deltaA) - lambda_h2h * logit_h2h
         pB = sigmoid(logit_p); pA = 1 - pB
-        favorite = playerB_name
+        if pB >= pA: favorite = playerB_name
+        else: favorite = playerA_name 
 
     print("\n🔎 Fatores do cálculo:")
     print(f" - Baseline p_gap: {p_gap:.3f} | logit_gap: {logit_gap:.3f}")
