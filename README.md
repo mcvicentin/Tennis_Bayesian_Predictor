@@ -11,7 +11,7 @@
 - [Pré-processamento](#pré-processamento)  
 - [Modelo (visão geral)](#modelo-visão-geral)  
 - [Componentes do modelo](#componentes-do-modelo)  
-  - [1) Baseline por ranking: ($p_{\text{gap}$})(#1-baseline-por-ranking-p_textgap)  
+  - [1) Baseline por ranking: $(p_{\text{gap}})$(#1-baseline-por-ranking-p_textgap)  
   - [2) Forma recente (Beta–Binomial)](#2-forma-recente-beta–binomial)  
   - [3) Head-to-Head (H2H) com decaimento por recência](#3-head-to-head-h2h-com-decaimento-por-recência)  
   - [4) Combinação final](#4-combinação-final)  
@@ -70,15 +70,15 @@
 A probabilidade de A vencer é modelada via um logit que agrega três termos:
 
 
-$$
-\underbrace{\text{logit}P(A \text{ vence})}_{\text{logit}(p_A)}
-=
+\[$$
+\underbrace{\text{logit}\,P(A \text{ vence})}_{\text{logit}(p_A)}
+\;=\;
 \underbrace{s\cdot \text{logit}(p_{\text{gap}})}_{\text{baseline por ranking}}
 \;+\;
 \underbrace{\big[\Delta_A - \Delta_B\big]}_{\text{forma recente}}
 \;+\;
 \underbrace{\lambda\cdot \text{logit}(p_{\text{H2H}})}_{\text{head-to-head (se n}\ge 4)}
-$$
+$$\]
 
 - \(s=+1\) se **A** é melhor ranqueado (menor número), \(s=-1\) se **B** é melhor ranqueado.
 - \(\Delta_X = \text{logit}(p_{\text{form},X})\) é a força recente do jogador \(X\) (vide abaixo).
