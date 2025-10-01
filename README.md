@@ -107,40 +107,40 @@ Guardamos também $\text{logit}(p_{\text{gap}})=\ln\frac{p_{\text{gap}}}{1-p_{\t
 
 ### 2) Forma recente (Beta–Binomial)
 
-Para cada jogador \(X\), percorremos seu histórico **ordenado por data** e calculamos, em cada jogo, a **probabilidade posterior** de vitória considerando as **últimas \(N\)** partidas anteriores (janela deslizante):
+Para cada jogador $X$, percorremos seu histórico **ordenado por data** e calculamos, em cada jogo, a **probabilidade posterior** de vitória considerando as **últimas $N$** partidas anteriores (janela deslizante):
 
-- Prior: \(\text{Beta}(\alpha,\beta)\) — padrão \(\alpha=\beta=2\) (suave e simétrica).
-- Se, antes do jogo \(t\), \(X\) tem \(n\) partidas na janela e \(w\) vitórias, então:
-  \[
-  p_{\text{form},X}(t) \;=\; \mathbb{E}[p\mid w,n] \;=\; 
+- Prior: $\text{Beta}(\alpha,\beta)\$ — padrão $\alpha=\beta=2$ (suave e simétrica).
+- Se, antes do jogo $t$, $X$ tem $n$ partidas na janela e $w$ vitórias, então:
+  $$
+  p_{\text{form},X}(t) = \mathbb{E}[p\mid w,n] = 
   \frac{\alpha + w}{\alpha + \beta + n}.
-  \]
-- Para predição **futura**, usamos **o último ponto disponível** \(p_{\text{form},X}^{\text{(últ)}}\) e definimos:
-  \[
-  \Delta_X \;=\; \text{logit}\Big(\text{clip}\big(p_{\text{form},X}^{\text{(últ)}}, 10^{-4}, 1-10^{-4}\big)\Big).
-  \]
+  $$
+- Para predição **futura**, usamos **o último ponto disponível** $p_{\text{form},X}^{\text{(últ)}}$ e definimos:
+  $$
+  \Delta_X = \text{logit}\Big(\text{clip}\big(p_{\text{form},X}^{\text{(últ)}} 10^{-4} 1-10^{-4}\big)\Big).
+  $$
 
 ---
 
 ### 3) Head-to-Head (H2H) com decaimento por recência
 
 - Selecionamos **apenas jogos A×B** (qualquer ordem).  
-- Se o total de confrontos \(n_{\text{H2H}} < 4\): **não aplicamos** o fator (informamos apenas “A x B = a–b”).  
+- Se o total de confrontos $n_{\text{H2H}} < 4$: **não aplicamos** o fator (informamos apenas “A x B = a–b”).  
 - Caso contrário, ponderamos as partidas por **recência**:  
   - Ordene os jogos da **mais recente** para a **mais antiga**;  
-  - Dê peso \(w_i = \gamma^{\,i}\) para o \(i\)-ésimo jogo (com \(i=0\) no mais recente);  
-  - \(\gamma\in(0,1)\) — padrão **0,95** (memória longa, mas com decaimento).
+  - Dê peso $w_i = \gamma^{\,i}$ para o $i$-ésimo jogo (com $i=0$ no mais recente);  
+  - $\gamma\in(0,1)$ — padrão **0,95** (memória longa, mas com decaimento).
 
-Definindo \(y_i=1\) se **A venceu** o jogo \(i\), e \(0\) caso contrário, usamos um posterior Beta ponderado:
+Definindo $y_i=1$ se **A venceu** o jogo $i$, e $0$ caso contrário, usamos um posterior Beta ponderado:
 
-\[
-p_{\text{H2H}} \;=\;
+$$
+p_{\text{H2H}} =
 \frac{\alpha + \sum_i w_i\,y_i}{\alpha + \beta + \sum_i w_i}
 \quad\text{e}\quad
 \text{logit}_\text{H2H}=\ln\frac{p_{\text{H2H}}}{1-p_{\text{H2H}}}.
-\]
+$$
 
-> Hiperparâmetros padrão para H2H: \(\alpha=\beta=1\) (uniforme) e \(\gamma=0{,}95\).
+> Hiperparâmetros padrão para H2H: $\alpha=\beta=1$ (uniforme) e $\gamma=0{,}95$.
 
 ---
 
@@ -148,28 +148,23 @@ p_{\text{H2H}} \;=\;
 
 Definimos o sinal do baseline de acordo com quem é **melhor ranqueado**:
 
-\[
-s \;=\; 
+$$
+s = 
 \begin{cases}
 +1, & \text{se } \text{rank}_A < \text{rank}_B \\
 -1, & \text{se } \text{rank}_B < \text{rank}_A
 \end{cases}
-\]
+$$
 
 e combinamos:
 
-\[
+$$
 \text{logit}(p_A)
-\;=\;
-s\cdot \text{logit}(p_{\text{gap}})
-\;+\;
-\big[\Delta_A - \Delta_B\big]
-\;+\;
-\lambda\cdot \text{logit}(p_{\text{H2H}}),
-\]
+=cs\cdot \text{logit}(p_{\text{gap}}) + \big[\Delta_A - \Delta_B\big] + \lambda\cdot \text{logit}(p_{\text{H2H}}),
+$$
 
-com \(\lambda\ge 0\) ajustável pelo usuário (ex.: 0 = ignora H2H; 1 = influência padrão).  
-Por fim, \(p_A=\sigma(\text{logit}(p_A))\) e \(p_B=1-p_A\).
+com $\lambda\ge 0$ ajustável pelo usuário (ex.: 0 = ignora H2H; 1 = influência padrão).  
+Por fim, $p_A=\sigma(\text{logit}(p_A))$ e $p_B=1-p_A$.
 
 ---
 
@@ -179,10 +174,10 @@ Por fim, \(p_A=\sigma(\text{logit}(p_A))\) e \(p_B=1-p_A\).
 - **Bins**:
   - `gap_bins = [0,5,10,20,50,100,200,500, ∞)`  
   - `best_bins = [0,10,20,50,100,200,500,1000, ∞)`  
-- **Suavização do baseline**: \((\text{wins}+2)/(\text{count}+4)\) ≡ Beta(2,2).  
+- **Suavização do baseline**: $(\text{wins}+2)/(\text{count}+4)$ ≡ Beta(2,2).  
 - **Forma recente**: janela **N=20** jogos (ajustável); prior Beta(2,2).  
-- **H2H**: \(\gamma=0{,}95\), prior Beta(1,1), mínimo 4 jogos.  
-- **Peso H2H**: \(\lambda\) informado pelo usuário a cada consulta.  
+- **H2H**: $\gamma=0{,}95$, prior Beta(1,1), mínimo 4 jogos.  
+- **Peso H2H**: $\lambda$ informado pelo usuário a cada consulta.  
 - **Normalização de nomes**: heurística `{sobrenome, inicial} → nome completo` + mapa manual.  
 - **Ranking do último jogo**: usa o **último registro**; se faltante, **retrocede** até achar valor válido.
 
