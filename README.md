@@ -70,13 +70,13 @@
 A probabilidade de A vencer é modelada via um logit que agrega três termos:
 
 
-$\text{logit}\,P(A \text{ vence})_{\text{logit}(p_A)}
+$$\text{logit}\,P(A \text{ vence})_{\text{logit}(p_A)}
 \;=\;
 s\cdot \text{logit}(p_{\text{gap}})_{\text{baseline por ranking}}
 \;+\;
 \big[\Delta_A - \Delta_B\big]_{\text{forma recente}}
 \;+\;
-\lambda\cdot \text{logit}(p_{\text{H2H}})_{\text{head-to-head (se n}\ge 4)}$
+\lambda\cdot \text{logit}(p_{\text{H2H}})_{\text{head-to-head (se n}\ge 4)}$$
 
 - \(s=+1\) se **A** é melhor ranqueado (menor número), \(s=-1\) se **B** é melhor ranqueado.
 - \(\Delta_X = \text{logit}(p_{\text{form},X})\) é a força recente do jogador \(X\) (vide abaixo).
