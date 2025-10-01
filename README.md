@@ -111,14 +111,12 @@ Para cada jogador $X$, percorremos seu histórico **ordenado por data** e calcul
 
 - Prior: $\text{Beta}(\alpha,\beta)\$ — padrão $\alpha=\beta=2$ (suave e simétrica).
 - Se, antes do jogo $t$, $X$ tem $n$ partidas na janela e $w$ vitórias, então:
-  $$
-  p_{\text{form},X}(t) = \mathbb{E}[p\mid w,n] = 
-  \frac{\alpha + w}{\alpha + \beta + n}.
-  $$
+   
+  $$p_{\text{form},X}(t) = \mathbb{E}[p\mid w,n] = 
+  \frac{\alpha + w}{\alpha + \beta + n}.$$
+  
 - Para predição **futura**, usamos **o último ponto disponível** $p_{\text{form},X}^{\text{(últ)}}$ e definimos:
-  $$
-  \Delta_X = \text{logit}\Big(\text{clip}\big(p_{\text{form},X}^{\text{(últ)}} 10^{-4} 1-10^{-4}\big)\Big).
-  $$
+  $$ \Delta_X = \text{logit}\Big(\text{clip}\big(p_{\text{form},X}^{\text{(últ)}} 10^{-4} 1-10^{-4}\big)\Big).$$
 
 ---
 
