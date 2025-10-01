@@ -77,8 +77,8 @@ $$
 \underbrace{\lambda\cdot \text{logit}(p_{\text{H2H}})}_{\text{head-to-head (se n}\ge 4)}
 $$
 
-- \(s=+1\) se **A** é melhor ranqueado (menor número), \(s=-1\) se **B** é melhor ranqueado.
-- \(\Delta_X = \text{logit}(p_{\text{form},X})\) é a força recente do jogador \(X\) (vide abaixo).
+- s=+1 se **A** é melhor ranqueado (menor número), s=-1 se **B** é melhor ranqueado.
+- $(\Delta_X = \text{logit}(p_{\text{form},X}))$ é a força recente do jogador \(X\) (vide abaixo).
 - \(\lambda\) é o **peso** do fator H2H, ajustável pelo usuário.
 - A saída final é \(p_A = \sigma\big(\text{logit}(p_A)\big)\), onde \(\sigma\) é a sigmoid.
 
